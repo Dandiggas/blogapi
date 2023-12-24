@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env 
+
+env = Env()  
+env.read_env()  
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,7 +54,8 @@ INSTALLED_APPS = [
     "allauth.account",  
     "allauth.socialaccount",  
     "dj_rest_auth",
-    "dj_rest_auth.registration",  
+    "dj_rest_auth.registration", 
+    "drf_spectacular", 
 
 
     # Local
@@ -148,12 +155,15 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
-    ],
+        ],
     "DEFAULT_AUTHENTICATION_CLASSES": [  
         "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.TokenAuthentication",  
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",  
 }
+
+
 
 
 
@@ -168,4 +178,11 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" 
 
 SITE_ID = 1
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Blog API Project",
+    "DESCRIPTION": "A sample blog to learn about DRF",
+    "VERSION": "1.0.0",
+    # OTHER SETTINGS
+}
 
