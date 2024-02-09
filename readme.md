@@ -25,7 +25,7 @@ This Django Blog API offers a powerful and versatile backend solution tailored f
 Before running the project, you need to set up environment variables. Create a `.env` file in the project root with the following contents:
 
 ```plaintext
-DEBUG=False
+DEBUG=True
 SECRET_KEY=<your_secret_key>
 DATABASE_URL=sqlite:///db.sqlite3
 ```
